@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Render Data into HTML Table using AJAX</h2>
+
+    <table id="rankings-table" class="table">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        
+    </table>
+
+    <script>
+        const rankingsBoday = document.querySelector("#rankings-table > tbody");
+
+        function loadingRankings() {
+            const request = new XMLHttpRequest();
+
+            request.open('GET', 'ranking.json');
+            request.onload = () => {
+                try {
+                    const json = JSON.parse(request.responseText);
+                    populateRankings(json);
+                } catch (e) {
+                    console.warn("Could not load rankings! :(");
+                }
+                
+                request.send();
+            }
+        }
+
+        function populateRankings(json){
+            console.log(json);
+        }
+        document.addEventListener("DOMContentLoaded", () => { loadingRankings(); });
+    </script>
+</body>
+</html>
